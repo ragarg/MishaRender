@@ -1,0 +1,7 @@
+set(target ${PROG_LIBRARY})
+
+file(GLOB hdrs "*.h" "math/*.h" "render/*.h" "sceneData/*.h")
+file(GLOB srcs "*.cpp" "math/*.cpp" "render/*.cpp" "sceneData/*.cpp")
+message(STATUS "message ${srcs} ${hdrs}")
+
+add_executable(${target} ${srcs})

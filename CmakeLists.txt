@@ -1,8 +1,29 @@
 cmake_minimum_required(VERSION 3.10) #показывает какой минимальной версией можно собрать проект
 
-project(MishaRender) #дает имя проекту
+set(PROJECT_NAME MishaRender)
+project(${PROJECT_NAME})
 
-#дает понять что будет собираться исполняеый файл(exe)
-#первый аргумент - это название собираемоего проекта, остальные исходные файлы *.h *.cpp
-#все аргументы записываются через пробел
-add_executable(MishaRender firstRenderer/hello_world.cpp) 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+#настраиваем места хранения скомпилированных файлов
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE})
+
+#даем названия подпроектам 
+set(PROG_LIBRARY "${PROJECT_NAME}") 
+
+#сораняем путь до директории include нашими хедарами 
+# set(PROG_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+#добавляет путь до нашей директории в область видимости всех проектов
+include_directories(${PROG_INCLUDE})
+message("Sources found")
+#добавляем директории наших подпроектов в область видимости CMake 
+add_subdirectory(src)
+
+# #дает понять что будет собираться исполняеый файл(exe)
+# #первый аргумент - это название собираемоего проекта, остальные исходные файлы *.h *.cpp
+# #все аргументы записываются через пробел
